@@ -33,6 +33,14 @@ function readJsonSafe(p) {
   }
 }
 
+function readDirSafe(p) {
+  try {
+    return fs.readdirSync(p).filter((f) => !f.startsWith("."));
+  } catch {
+    return [];
+  }
+}
+
 function findFilesRecursive(repoRoot, predicate, { maxFiles = 6000, maxDepth = 10 } = {}) {
   const results = [];
   const queue = [{ dir: repoRoot, depth: 0 }];
@@ -77,33 +85,67 @@ function summarizeTheme(repoRoot, themeJsonPath) {
   const patternsDir = path.join(repoRoot, rootDir, "patterns");
   const stylesDir = path.join(repoRoot, rootDir, "styles");
 
-  const hasTemplates = existsDir(templatesDir);
-  const hasParts = existsDir(partsDir);
+  const templates = readDirSafe(templatesDir);
+  const parts = readDirSafe(partsDir);
+  const patterns = readDirSafe(patternsDir);
+  const styleVariations = readDirSafe(stylesDir);
+
+  const colorPalette = json?.settings?.color?.palette?.map((c) => ({
+    name: c.name,
+    slug: c.slug,
+    color: c.color,
+  })) || [];
+
+  const fontSizes = json?.settings?.typography?.fontSizes?.map((f) => ({
+    name: f.name,
+    slug: f.slug,
+    size: f.size,
+  })) || [];
+
+  const fluidTypography = Boolean(json?.settings?.typography?.fluid);
+  const customCssInjected = Boolean(
+    json?.styles?.css ||
+    (json?.styles?.blocks && Object.values(json.styles.blocks).some((b) => b.css))
+  );
 
   return {
     themeRoot: rootDir,
     themeJson: rel,
     version: typeof json?.version === "number" ? json.version : null,
-    hasTemplates,
-    hasParts,
-    hasPatterns: existsDir(patternsDir),
-    hasStyles: existsDir(stylesDir),
-    isBlockTheme: hasTemplates || hasParts,
+    hasTemplates: templates.length > 0,
+    templates,
+    hasParts: parts.length > 0,
+    parts,
+    hasPatterns: patterns.length > 0,
+    patterns,
+    hasStyles: styleVariations.length > 0,
+    styleVariations,
+    colorPaletteCount: colorPalette.length,
+    colorPalette,
+    fontSizesCount: fontSizes.length,
+    fontSizes,
+    fluidTypography,
+    customCssInjected,
+    isBlockTheme: templates.length > 0 || parts.length > 0,
   };
 }
 
 function main() {
   const repoRoot = process.cwd();
 
-  const { results: themeJsonFiles, truncated } = findFilesRecursive(repoRoot, (p) => path.basename(p) === "theme.json", {
-    maxFiles: 8000,
-    maxDepth: 12,
-  });
+  const { results: themeJsonFiles, truncated } = findFilesRecursive(
+    repoRoot,
+    (p) => path.basename(p) === "theme.json",
+    {
+      maxFiles: 8000,
+      maxDepth: 12,
+    }
+  );
 
   const themes = themeJsonFiles.map((p) => summarizeTheme(repoRoot, p));
 
   const report = {
-    tool: { name: "detect_block_themes", version: "0.1.0" },
+    tool: { name: "detect_block_themes", version: "0.2.0" },
     repoRoot,
     truncated,
     count: themes.length,
@@ -114,4 +156,3 @@ function main() {
 }
 
 main();
-
