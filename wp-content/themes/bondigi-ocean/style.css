@@ -1,0 +1,514 @@
+/*
+Theme Name: Bondigi Ocean
+Theme URI: https://effethemes.com/themes/bondigi-WordPress-theme/
+Author: Effe Themes
+Author URI: https://effethemes.com/
+Description: Bondigi Ocean is a deep ocean remix of the Bondigi WordPress block theme. Dive into abyssal blues, cyan reefs, and coral accents. Fully optimized for Full Site Editing.
+Demo: https://effethemes.com/themes/bondigi-wordpress-theme
+Requires at least: 6.6
+Tested up to: 6.9
+Requires PHP: 5.7
+Version: 1.0.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: bondigi-ocean
+Tags: blog, portfolio, block-styles, e-commerce, full-site-editing, two-columns, full-width-template, custom-logo, custom-menu, custom-background, editor-style, block-patterns, custom-header, translation-editing, template-editing
+*/
+
+/* ═══════════════ OCEAN COLOR THEME — CSS VARIABLES ═══════════════ */
+:root {
+  --ocean-deep: #0A1628;
+  --ocean-mid: #0F2B4C;
+  --ocean-blue: #1565C0;
+  --ocean-cyan: #00BCD4;
+  --ocean-coral: #FF6B6B;
+  --ocean-sand: #B0D4E8;
+  --ocean-foam: #E0F7FA;
+  --ocean-kelp: #27AE60;
+  --ocean-sunlight: #FFD93D;
+  --ocean-surface: #1A5276;
+  --glow-cyan: rgba(0, 188, 212, 0.35);
+  --glow-coral: rgba(255, 107, 107, 0.25);
+}
+
+/* ═══════════════ GENERAL STYLES ═══════════════ */
+
+html,
+body {
+  overflow-x: hidden;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--wp--preset--color--custom-background-primary);
+  color: var(--wp--preset--color--custom-text-color);
+  font-family: 'Poppins', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+  font-family: 'Cinzel', 'Montserrat', serif !important;
+  letter-spacing: 0.04em;
+}
+
+a {
+  color: inherit;
+  -webkit-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+ul > li > a {
+  text-decoration: none;
+}
+
+ul > li > a:hover {
+  color: var(--ocean-cyan) !important;
+}
+
+:where(.wp-site-blocks) > * {
+  -webkit-margin-before: 0;
+          margin-block-start: 0;
+}
+
+.is-style-outline > a {
+  background: transparent !important;
+}
+
+.wp-block-search.wp-block-search__button-only .wp-block-search__button {
+  display: block !important;
+}
+
+.full-width-image,
+.full-width-image > img {
+  width: 100% !important;
+}
+
+/* ═══════════════ OCEAN TEXTURE OVERLAYS ═══════════════ */
+
+.wp-block-group.has-background::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  border-radius: inherit;
+}
+
+/* ═══════════════ POPUP ═══════════════ */
+
+.bondigi-ocean-fixed-message {
+  position: fixed;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  background: linear-gradient(180deg, var(--ocean-blue), var(--ocean-surface)) !important;
+  border-left: 2px solid var(--ocean-cyan);
+  padding: 20px 20px;
+  z-index: 1000;
+  word-wrap: break-word;
+  max-height: 70% !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: -4px 0 20px rgba(0, 188, 212, 0.3);
+}
+
+.bondigi-ocean-fixed-message a {
+  color: var(--ocean-foam);
+  writing-mode: vertical-rl;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+  word-wrap: break-word;
+  max-height: 70% !important;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 2px;
+}
+
+/* ═══════════════ HEADER ═══════════════ */
+
+.wp-block-site-title > a {
+  text-decoration: none;
+  font-family: 'Cinzel', serif !important;
+  letter-spacing: 3px;
+  color: var(--ocean-cyan) !important;
+  text-shadow: 0 0 20px var(--glow-cyan);
+}
+
+.wp-block-site-title > a:hover {
+  color: var(--ocean-sunlight) !important;
+  text-shadow: 0 0 30px var(--glow-cyan), 0 0 60px rgba(0, 188, 212, 0.2);
+}
+
+.wp-block-navigation-item:hover {
+  color: var(--ocean-cyan) !important;
+}
+
+.wp-block-navigation__responsive-container-content {
+  -webkit-box-align: start !important;
+      -ms-flex-align: start !important;
+          align-items: start !important;
+}
+
+.wp-block-navigation:not(.has-background) .wp-block-navigation__submenu-container {
+  border: 0 !important;
+}
+
+.wp-block-navigation-submenu > li {
+  background: var(--wp--preset--color--custom-background-secondary) !important;
+  color: var(--wp--preset--color--custom-text-color);
+  border-left: 2px solid var(--ocean-blue);
+}
+
+.header-search-icon > div > button {
+  background: transparent;
+  padding: 0;
+}
+
+/* ═══════════════ HERO SECTION ═══════════════ */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background: linear-gradient(
+    to top,
+    rgba(10, 22, 40, 0.95) 0%,
+    rgba(10, 22, 40, 0.5) 50%,
+    transparent 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  bottom: 30%;
+  left: 50%;
+  transform: translateX(-50%) rotate(-5deg);
+  width: 200%;
+  height: 120px;
+  background: radial-gradient(
+    ellipse 60% 100% at 50% 50%,
+    rgba(0, 188, 212, 0.18) 0%,
+    rgba(255, 107, 107, 0.08) 50%,
+    rgba(21, 101, 192, 0.04) 80%,
+    transparent 100%
+  );
+  filter: blur(50px);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 3;
+}
+
+/* Ocean decorative divider */
+.ocean-divider {
+  display: block;
+  width: 120px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--ocean-cyan), transparent);
+  margin: 12px 0;
+  position: relative;
+}
+
+.ocean-divider::before,
+.ocean-divider::after {
+  content: "~";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--ocean-cyan);
+  font-size: 14px;
+  line-height: 1;
+  font-weight: bold;
+}
+
+.ocean-divider::before { left: -12px; }
+.ocean-divider::after  { right: -12px; }
+
+/* ═══════════════ STATS BAR (Ocean Currents) ═══════════════ */
+
+.stats-bar {
+  background: linear-gradient(135deg, rgba(21, 101, 192, 0.15), rgba(10, 22, 40, 0.9)) !important;
+  border: 1px solid rgba(0, 188, 212, 0.3) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.stats-bar .wp-block-column {
+  border-right-color: rgba(0, 188, 212, 0.3) !important;
+  border-right-width: 1px !important;
+}
+
+/* ═══════════════ BLOG / POST ═══════════════ */
+
+.wp-block-post-title > a:hover {
+  color: var(--ocean-cyan) !important;
+}
+
+.wp-block-button__link,
+.wp-block-search__button {
+  background: linear-gradient(135deg, var(--ocean-blue) 0%, var(--ocean-surface) 100%) !important;
+  border: 1px solid var(--ocean-sunlight) !important;
+  color: var(--ocean-foam) !important;
+  font-family: 'Cinzel', serif !important;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-size: 13px !important;
+  position: relative;
+  overflow: hidden;
+  -webkit-transition: all 0.35s ease-in-out;
+  -o-transition: all 0.35s ease-in-out;
+  transition: all 0.35s ease-in-out;
+  box-shadow: 0 4px 15px rgba(21, 101, 192, 0.3), inset 0 1px 0 rgba(255,255,255,0.08);
+}
+
+.wp-block-button__link::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -75%;
+  width: 50%;
+  height: 200%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.12),
+    transparent
+  );
+  transform: skewX(-20deg);
+  transition: left 0.6s ease;
+  pointer-events: none;
+}
+
+.wp-block-button__link:hover::before {
+  left: 150%;
+}
+
+.wp-block-button__link:hover,
+.wp-block-search__button:hover {
+  background: linear-gradient(135deg, var(--ocean-cyan) 0%, var(--ocean-blue) 100%) !important;
+  box-shadow: 0 6px 25px rgba(0, 188, 212, 0.5), inset 0 1px 0 rgba(255,255,255,0.12);
+  transform: translateY(-2px);
+  border-color: var(--ocean-cyan) !important;
+}
+
+input,
+textarea {
+  background: var(--wp--preset--color--custom-background-secondary);
+  color: var(--ocean-sand) !important;
+  border: 1px solid rgba(0, 188, 212, 0.2) !important;
+}
+
+input:focus,
+textarea:focus {
+  border-color: var(--ocean-cyan) !important;
+  box-shadow: 0 0 0 2px rgba(0, 188, 212, 0.15);
+  outline: none;
+}
+
+/* ═══════════════ ABOUT / STATS CARDS ═══════════════ */
+
+.ocean-stat-card {
+  background: linear-gradient(135deg, rgba(21, 101, 192, 0.15), rgba(15, 43, 76, 0.9)) !important;
+  border: 1px solid rgba(0, 188, 212, 0.35) !important;
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ocean-stat-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--ocean-cyan), transparent);
+}
+
+.ocean-stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 188, 212, 0.2);
+}
+
+/* ═══════════════ CTA SECTION ═══════════════ */
+
+.cta-ocean {
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-ocean::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg,
+    rgba(21, 101, 192, 0.08) 0%,
+    transparent 50%,
+    rgba(255, 107, 107, 0.05) 100%
+  );
+  pointer-events: none;
+}
+
+/* ═══════════════ FOOTER ═══════════════ */
+
+.copy > a {
+  text-decoration: none;
+  color: var(--ocean-cyan) !important;
+}
+
+.copy > a:hover {
+  opacity: 0.8;
+  text-shadow: 0 0 12px var(--glow-cyan);
+}
+
+footer {
+  border-top: 1px solid rgba(0, 188, 212, 0.2);
+  background: var(--ocean-mid) !important;
+}
+
+/* ═══════════════ DECORATIVE ELEMENTS ═══════════════ */
+
+.ornament-border {
+  border-image: linear-gradient(90deg, transparent, var(--ocean-cyan), transparent) 1;
+}
+
+/* Coral shimmer animation */
+@keyframes coralShimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.coral-shimmer-text {
+  background: linear-gradient(
+    90deg,
+    var(--ocean-coral) 0%,
+    var(--ocean-sunlight) 40%,
+    var(--ocean-cyan) 60%,
+    var(--ocean-coral) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: coralShimmer 4s linear infinite;
+}
+
+/* Floating bubbles */
+@keyframes bubbleFloat {
+  0%, 100% { opacity: 0; transform: translateY(0) translateX(0); }
+  50%       { opacity: 1; transform: translateY(-30px) translateX(10px); }
+}
+
+/* ═══════════════ SCROLL ANIMATION ═══════════════ */
+
+@keyframes oceanFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.wp-block-group,
+.wp-block-columns {
+  animation: oceanFadeIn 0.8s ease-out both;
+}
+
+/* ═══════════════ SELECTION COLORS ═══════════════ */
+
+::selection {
+  background: rgba(0, 188, 212, 0.35);
+  color: var(--ocean-foam);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--ocean-mid);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--ocean-cyan), var(--ocean-blue));
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ocean-cyan);
+}
+
+/* ═══════════════ MEDIA QUERIES ═══════════════ */
+
+@media (max-width: 1024px) {
+  .wp-block-columns {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+
+  .hero-cta-buttons {
+    justify-self: baseline;
+  }
+
+  .hero-content > div {
+    max-width: max-content !important;
+  }
+}
+
+@media (max-width: 992px) {
+  .wp-block-navigation__responsive-container:not(.hidden-by-default):not(.is-menu-open) .wp-block-navigation__responsive-container-close,
+  .wp-block-navigation__responsive-container-open:not(.always-shown),
+  .wp-block-navigation__responsive-container:not(.hidden-by-default):not(.is-menu-open) {
+    display: none;
+  }
+
+  .wp-block-navigation__responsive-container-open:not(.always-shown) {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+
+  .wp-block-navigation__container {
+    --navigation-layout-justification-setting: flex-start !important;
+    --navigation-layout-justify: flex-start !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .wp-block-buttons {
+    flex-direction: column;
+  }
+}
